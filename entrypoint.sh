@@ -25,6 +25,6 @@ done
 
 set -x
 
-sed -i "s/^AllowUsers .*/AllowUsers ${USERS//,/ }/" /etc/ssh/sshd_config
+echo "AllowUsers ${USERS//,/ }" >> /etc/ssh/sshd_config
 
 exec "$@"
