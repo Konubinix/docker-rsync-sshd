@@ -10,12 +10,8 @@ SET_OPTION:
     RUN grep -q "^#\?${option}" /etc/ssh/sshd_config
     RUN sed -r -i -e "s/^#?${option}.+/${option} ${value}/" /etc/ssh/sshd_config
 
-
 build:
     FROM e+alpine --extra_packages="openssh-server rrsync rsync sed"
-
-    ENV SSHD_HOST_KEYS_DIR /etc/ssh/host_keys
-    VOLUME $SSHD_HOST_KEYS_DIR
 
     FOR option IN PermitRootLogin PasswordAuthentication StrictModes AllowAgentForwarding AllowTcpForwarding GatewayPorts X11Forwarding PermitUserEnvironment PermitTTY PrintMotd
         DO +SET_OPTION --option "${option}" --value "no"

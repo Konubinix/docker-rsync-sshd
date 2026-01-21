@@ -1,10 +1,6 @@
 #!/bin/sh
 set -e
 
-if [ ! -f "$SSHD_HOST_KEYS_DIR/rsa" ]; then
-    ssh-keygen -t rsa -b 4096 -N '' -C '' -f "$SSHD_HOST_KEYS_DIR/rsa"
-fi
-
 if [ -z "$USERS" ]; then
     echo '$USERS is not set'
     exit 1
